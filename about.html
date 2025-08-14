@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login / Register</title>
+
+  <!-- Font Awesome सिर्फ cart icon के लिए (optional) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+  <style>
+    body { font-family: Arial, sans-serif; background:#f2f2f2; margin:0; }
+    /* Header / Navbar */
+    #header {
+      display:flex; align-items:center; justify-content:space-between;
+      padding:20px 80px; background:#fff;
+      box-shadow:0 5px 10px rgba(0,0,0,0.15); z-index:999; height:70px; box-sizing:border-box;
+    }
+    .logo { width:183px; height:auto; display:block; object-fit:contain; }
+    .navbar { display:flex; align-items:center; justify-content:center; }
+    .navbar ul { list-style:none; padding:0 20px; display:flex; gap:40px; margin:0; }
+    .navbar ul a {
+      text-decoration:none; color:#333; font-weight:500; font-size:18px; transition:color .3s;
+      position:relative;
+    }
+    .navbar ul a:hover, .navbar ul a.active { color:#ff4500; }
+    .navbar ul a:hover::after, .navbar ul a.active::after {
+      content:""; width:20%; height:2px; background:#ff4500; position:absolute; bottom:-4px; left:20px;
+    }
+
+    /* Auth Card */
+    .container {
+      background:#fff; padding:20px; border-radius:10px; width:350px;
+      box-shadow:0 4px 10px rgba(0,0,0,0.1); margin:50px auto;
+    }
+    h2 { text-align:center; margin:0 0 15px; }
+    form { display:flex; flex-direction:column; }
+    input {
+      margin:8px 0; padding:10px; border:1px solid #ccc; border-radius:5px;
+    }
+    button {
+      margin-top:10px; padding:10px; background:#ff4d4d; border:none; color:#fff;
+      cursor:pointer; border-radius:5px;
+    }
+    button:hover { background:#e60000; }
+    .switch { text-align:center; margin-top:10px; }
+    .switch a { color:#ff4d4d; cursor:pointer; text-decoration:none; }
+    .msg { font-size:14px; text-align:center; margin-top:8px; }
+    .msg.ok { color:green; }
+    .msg.err { color:#d10000; }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <section id="header">
+    <a href="index.html">
+      <img src="images/logo.jpg" class="logo" alt="Fairdeal logo"/>
+    </a>
+    <nav class="navbar">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="shop.html">Shop</a></li>
+        <li><a href="blog.html">About</a></li>
+        <li><a class="active" href="about.html">Login / Register</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li id="cart-icon"><a href="cart.html"><i class="fas fa-shopping-cart"></i></a></li>
+      </ul>
+    </nav>
+  </section>
+
+  <!-- Auth Card -->
+  <div class="container">
+    <h2 id="form-title">Login</h2>
+
+    <!-- Login Form -->
+    <form id="login-form" autocomplete="on">
+      <input id="login-email" type="email" placeholder="Email" required />
+      <input id="login-pass" type="password" placeholder="Password" required />
+      <button type="submit">Login</button>
+      <div id="login-msg" class="msg"></div>
+    </form>
+
+    <!-- Register Form -->
+    <form id="register-form" style="display:none;" autocomplete="on">
+      <input id="reg-name" type="text" placeholder="Full Name" required />
+      <input id="reg-email" type="email" placeholder="Email" required />
+      <input id="reg-pass" type="password" placeholder="Password" required />
+      <button type="submit">Register</button>
+      <div id="reg-msg" class="msg"></div>
+    </form>
+
+    <div class="switch">
+      <p id="switch-text">Don't have an account? <a id="go-register">Register</a></p>
+    </div>
+  </div>
+
+  <script>
+   // ---------- Form toggle ----------
+const loginForm   = document.getElementById('login-form');
+const registerForm= document.getElementById('register-form');
+const formTitle   = document.getElementById('form-title');
+const switchText  = document.getElementById('switch-text');
+const goRegister  = document.getElementById('go-register');
+
+function showRegister() {
+  loginForm.style.display = 'none';
+  registerForm.style.display = 'block';
+  formTitle.innerText = 'Register';
+  switchText.innerHTML = 'Already have an account? <a id="go-login">Login</a>';
+  document.getElementById('go-login').addEventListener('click', showLogin);
+}
+
+function showLogin() {
+  registerForm.style.display = 'none';
+  loginForm.style.display = 'block';
+  formTitle.innerText = 'Login';
+  switchText.innerHTML = 'Don\'t have an account? <a id="go-register">Register</a>';
+  document.getElementById('go-register').addEventListener('click', showRegister);
+}
+
+goRegister.addEventListener('click', showRegister);
+
+// ---------- सिर्फ एक बार यहाँ URL डालो ----------
+const scriptURL = "https://script.google.com/macros/s/AKfycbz8V6TJ4xtrUHEmTxp6TtDQoQSuXW0Ar8e7aQnoJ1w92YFYd87Pk0FmCYyuYrYQAo_RFw/exec";
+
+// Helper: message दिखाना
+function showMsg(el, text, ok=true) {
+  el.className = 'msg ' + (ok ? 'ok' : 'err');
+  el.textContent = text;
+  setTimeout(() => { el.textContent = ''; }, 3000);
+}
+
+// ---------- Login Submit ----------
+loginForm.addEventListener('submit', function(e) {
+  e.preventDefault();
+  const email = document.getElementById('login-email').value.trim();
+  const password = document.getElementById('login-pass').value.trim();
+  const msgEl = document.getElementById('login-msg');
+
+  if (!scriptURL) {
+    showMsg(msgEl, 'Please set your Web App URL in scriptURL!', false);
+    return;
+  }
+
+  fetch(scriptURL, {
+    method: 'POST',
+    mode: 'no-cors',
+    body: JSON.stringify({ name:"", email, password, type:"Login" })
+  })
+  .then(() => {
+    showMsg(msgEl, 'Login submitted! (saved to Google Sheet)');
+    this.reset();
+    // सफल login के बाद redirect कर सकते हो:
+    // window.location.href = 'index.html';
+  })
+  .catch(() => showMsg(msgEl, 'Network error. Try again!', false));
+});
+
+// ---------- Register Submit ----------
+registerForm.addEventListener('submit', function(e) {
+  e.preventDefault();
+  const name  = document.getElementById('reg-name').value.trim();
+  const email = document.getElementById('reg-email').value.trim();
+  const password = document.getElementById('reg-pass').value.trim();
+  const msgEl = document.getElementById('reg-msg');
+
+  if (!scriptURL) {
+    showMsg(msgEl, 'Please set your Web App URL in scriptURL!', false);
+    return;
+  }
+
+  fetch(scriptURL, {
+    method: 'POST',
+    mode: 'no-cors',
+    body: JSON.stringify({ name, email, password, type:"Register" })
+  })
+  .then(() => {
+    showMsg(msgEl, 'Registered! (saved to Google Sheet)');
+    this.reset();
+    showLogin();
+  })
+  .catch(() => showMsg(msgEl, 'Network error. Try again!', false));
+});
+
+  </script>
+</body>
+</html>

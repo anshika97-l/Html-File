@@ -117,12 +117,12 @@ body {
   }
   
   .navbar ul a:hover,
-  .navbar ul a:active {
+  .navbar ul a.active {
     color: #ff4500; /* Nice hover effect */
   }
   
   .navbar ul a:hover::after,
-  .navbar ul a:active::after {
+  .navbar ul a.active::after {
     content: "";
     width: 20%;
     height: 2px;
@@ -540,6 +540,353 @@ body {
     font-size: larger;
    }
 
+   #page-header{
+    background-image: url(banner/b1.jpg);
+    width: 100%;
+    height: 40vh;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+    padding: 40px;
+   }
+   #page-header h2,
+   #page-header p{
+    color: #fff;
+   }
+
+   #pagination{
+    text-align: center;
+   }
+
+   #pagination a{
+    text-decoration: none;
+    background-color: #088178;
+    padding: 15px 20px;
+    border-radius: 4px;
+    color: #fff;
+    font-weight: 600;
+   }
+
+   #pagination a i{
+     font-size: 16px;
+     font-weight: 600;
+   }
+
+  /* पूरे प्रोडक्ट सेक्शन को flex में लाना */
+#prodetails {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+/* Main product image */
+.single-pro-image #MainImg {
+    width: 400px;   /* main image की चौड़ाई fix */
+    height: auto;
+    object-fit: contain; /* image crop न हो */
+    border: 1px solid #ddd;
+}
+
+/* Thumbnail group styling */
+.small-img-group {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+/* हर thumbnail image */
+.small-img-col img {
+    width: 100%;
+    max-width: 90px; /* thumbnail की max size */
+    height: auto;
+    cursor: pointer;
+    border: 1px solid #ddd;
+    transition: border 0.3s ease;
+}
+
+.small-img-col img:hover {
+    border: 2px solid #333;
+}
+   .small-img-col{
+    flex-basis: 24%;
+    cursor: pointer;
+   }
+
+#prodetails{
+  display: flex;
+  margin-top: 20px;
+}
+#prodetails .single-pro-details{
+  width: 50%;
+  padding-top: 30px;
+}
+
+#prodetails .single-pro-details h4{
+  padding: 20px 0 20px 0;
+}
+
+#prodetails .single-pro-details h2{
+  font-size: 26px;
+}
+#prodetails .single-pro-details select{
+  display: block;
+  padding: 5px 10px;
+  margin-bottom: 10px;
+}
+
+#prodetails .single-pro-details input{
+  width: 50px;
+  height: 47px;
+  padding-left: 10px;
+  font-size: 16px;
+  margin-right: 10px;
+}
+#prodetails .single-pro-details button{
+  background-color: #088178;
+  color: #fff;
+}
+#prodetails .single-pro-details span{
+  line-height: 25px;
+}
+
+#page-header.about-header{
+  background-image: url(banner/banner.png);
+}
+
+#about-head{
+  display: flex;
+  align-items: center;
+}
+#about-head img{
+  width: 50%;
+  height: auto;
+}
+#about-head div{
+  padding: 40px;
+}
+
+#about-app{
+  text-align: center;
+}
+
+#about-app .video{
+  width: 70%;
+  height: 100%;
+  margin: 30px auto 0 auto;
+}
+#about-app .video video{
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
+}
+
+#contact-details{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#contact-details .details{
+  width: 40%;
+}
+
+#contact-details .details span,
+#form-details form span{
+  font-size: 12px;
+}
+
+#contact-details .details h2,
+#form-details form h2{
+  font-size: 26px;
+  line-height: 35px;
+  padding: 20px 0;
+}
+ #contact-details .details h3{
+  font-size: 16px;
+  padding-bottom: 15px;
+ }
+
+ #contact-details .details li{
+  list-style: none;
+  display: flex;
+  padding: 10px 0;
+ }
+
+ #contact-details .details li i{
+  font-size: 14px;
+  padding-right: 22px;
+ }
+
+ #contact-details .details li p{
+  margin: 0%;
+  font-size: 14px;
+ }
+#contact-details .map{
+  width: 55%;
+  height: 400px;
+}
+
+#contact-details .map iframe{
+  width: 100%;
+  height: 100%;
+}
+
+#form-details{
+  display: flex;
+  justify-content: space-between;
+  margin: 30px;
+  padding: 80px;
+  border: 1px solid #e1e1e1;
+}
+
+#form-details form{
+  width: 65%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+#form-details form input,
+#form-details form textarea{
+  width: 100%;
+  padding: 12px 15px;
+  outline: none;
+  margin-bottom: 20px;
+  border: 1px solid #e1e1e1;
+}
+
+#form-details form button{
+  background-color: #088178;
+  color: #fff;
+}
+#form-details .people div{
+  padding-bottom: 25px;
+  display: flex;
+  align-items: flex-start;
+}
+
+#form-details .people div img{
+  width: 65px;
+  height: 65px;
+  object-fit: cover;
+  margin-right: 15px;
+}
+
+#form-details .people div p{
+  margin: 0%;
+  font-size: 13px;
+  line-height: 25px;
+}
+
+#form-details .people div p span{
+  display: block;
+  font-size: 16px;
+  font-weight: 600;
+  color: #000;
+}
+
+#cart table{
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  white-space: nowrap;
+}
+#cart table img{
+  width: 70px;
+}
+#cart table td:nth-child(1){
+  width: 100px;
+  text-align: center;
+}
+
+#cart table td:nth-child(2){
+  width: 150px;
+  text-align: center;
+}
+
+#cart table td:nth-child(3){
+  width: 250px;
+  text-align: center;
+}
+
+#cart table td:nth-child(4),
+#cart table td:nth-child(5),
+#cart table td:nth-child(6){
+  width: 150px;
+  text-align: center;
+}
+
+#cart table td:nth-child(5) input{
+  width: 70px;
+  padding: 10px 5px 10px 15px;
+}
+
+#cart table thead{
+  border: 1px solid #e1e1e1;
+  border-left: none;
+  border-right: none;
+}
+#cart table thead td{
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 13px;
+  padding: 18px 0;
+}
+#cart table tbody tr td{
+  padding-top: 15px;
+}
+
+#cart-add{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+#coupon{
+  width: 50%;
+  margin-bottom: 30px;
+}
+#coupon h3,
+#subtotal h3{
+  padding-bottom: 15px;
+}
+
+#coupon input{
+  padding: 10px 20px;
+  outline: none;
+  width: 60%;
+  margin-right: 10px;
+  border: 1px solid #e1e1e1;
+}
+
+#coupon button,
+#subtotal button{
+  background-color: #088178;
+  color: #fff;
+  padding: 12px 20px;
+}
+
+#subtotal{
+  width: 50%;
+  margin-bottom: 30px;
+  border: 1px solid #e1e1e1;
+  padding: 30px;
+}
+
+#subtotal table{
+  border-collapse: collapse;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+#subtotal table td{
+  width: 50%;
+  border: 1px solid #e1e1e1;
+  padding: 10px;
+  font-size: 13px;
+}
    @media (max-width: 799px) {
       .navbar {
       display: flex;
